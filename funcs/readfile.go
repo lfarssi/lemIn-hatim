@@ -2,17 +2,16 @@ package Mosdef
 
 import (
 	"bufio"
-	"log"
 	"os"
 	"strings"
 )
 
-func ReadFile() []string {
+func ReadFile() ([]string, string) {
 	lines := make([]string, 0)
 	filename := os.Args[1]
 	file, err := os.Open(filename)
 	if err != nil {
-		log.Fatal("ERROR: invalid data format. there is no such file please check the path")
+		return nil, "ERROR: invalid data format. there is no such file please check the path"
 	}
 	defer file.Close()
 
@@ -29,12 +28,12 @@ func ReadFile() []string {
 		lines = append(lines, strings.TrimSpace(scanner.Text()))
 	}
 	if len(lines) == 0 {
-		log.Fatal("ERROR: invalid data format. empty file")
+		return nil, "ERROR: invalid data format. empty file"
 	} else if !startex {
-		log.Fatal("ERROR: invalid data format.there is no start room")
+		return nil, "ERROR: invalid data format.there is no start room"
 	} else if !endex {
-		log.Fatal("ERROR: invalid data format.there is no end room")
+		return nil, "ERROR: invalid data format.there is no end room"
 	}
-	
-	return lines
+
+	return lines, ""
 }
