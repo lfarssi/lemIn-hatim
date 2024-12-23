@@ -17,8 +17,12 @@ func GetRooms(lines []string) (string, string, int, map[string][]string) {
 	links := make(map[string][]string)
 	linkscomb := make(map[string]bool)
 	for i, line := range lines {
+		var next []string
 		room := strings.Split(line, " ") 
 		tunnel := strings.Split(line, "-")
+		if i+1 != len(lines) {
+			next = strings.Split(lines[i+1], " ")
+		}
 		if line == "" || (len(room) != 3 && len(tunnel) != 2 && line[0] != '#' && i != 0)  {
 
 			log.Fatal("ERROR: invalid data format. invalid syntax")
@@ -55,9 +59,9 @@ func GetRooms(lines []string) (string, string, int, map[string][]string) {
 			coords[room[1]+"+"+room[2]] =true
 		}
 		if line == "##start" && !startroom {
-			if i+1 != len(lines) && len(strings.Split(lines[i+1], " ")) == 3 {
+			if i+1 != len(lines) && len(next) == 3 {
 				startroom = true
-				start = strings.Split(lines[i+1], " ")[0]
+				start = next[0]
 			} else {
 				log.Fatal("ERROR: invalid data format.there is no start room")
 			}
@@ -65,9 +69,9 @@ func GetRooms(lines []string) (string, string, int, map[string][]string) {
 			log.Fatal("ERROR: invalid data format.there is too many start rooms")
 		}
 		if line == "##end" && !endroom {
-			if i+1 != len(lines) && len(strings.Split(lines[i+1], " ")) == 3 {
+			if i+1 != len(lines) && len(next) == 3 {
 				endroom = true
-				end = strings.Split(lines[i+1], " ")[0]
+				end = next[0]
 			} else {
 				log.Fatal("ERROR: invalid data format.there is no end room")
 			}
