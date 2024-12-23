@@ -29,7 +29,7 @@ func DistributeAnts(paths [][]string, numberOfAnts int) [][]int {
 	return antDistribution
 }
 
-func SimulateAntMovement(paths [][]string, antDistribution [][]int) (string, int) {
+func SimulateAntMovement(paths [][]string, antDistribution [][]int) (string) {
 	var finalResult string
 	type AntPosition struct {
 		ant  int
@@ -44,7 +44,6 @@ func SimulateAntMovement(paths [][]string, antDistribution [][]int) (string, int
 		}
 	}
 
-	moveCount := 0
 	for len(antPositions) > 0 {
 		var moves []string
 		var newPositions []AntPosition
@@ -69,7 +68,6 @@ func SimulateAntMovement(paths [][]string, antDistribution [][]int) (string, int
 			finalResult += "\n"
 		}
 		antPositions = newPositions
-		moveCount++
 	}
-	return finalResult, moveCount - 1
+	return finalResult
 }

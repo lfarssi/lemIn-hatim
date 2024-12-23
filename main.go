@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"strings"
 
 	Mosdef "Mosdef/funcs"
@@ -20,13 +19,10 @@ func main() {
 	}
 	filteredPaths := Mosdef.FilterPaths(allPaths)
 	antDistribution := Mosdef.DistributeAnts(filteredPaths, antsNumber)
-	finalResult, moveCount := Mosdef.SimulateAntMovement(filteredPaths, antDistribution)
+	finalResult := Mosdef.SimulateAntMovement(filteredPaths, antDistribution)
 
-	if moveCount < 1 {
-		log.Fatal("Error: Invalid data format")
-	}
 	for i, line := range lines {
-		if i==0 || line[0] != '#' || line == "##start" || line == "##end" {
+		if i == 0 || line[0] != '#' || line == "##start" || line == "##end" {
 			fmt.Println(strings.TrimSpace(line))
 		}
 	}

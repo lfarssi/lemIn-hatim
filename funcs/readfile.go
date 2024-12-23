@@ -30,8 +30,7 @@ func ReadFile() []string {
 	}
 	if len(lines) == 0 {
 		log.Fatal("ERROR: invalid data format. empty file")
-	}
-	if !startex {
+	} else if !startex {
 		log.Fatal("ERROR: invalid data format.there is no start room")
 	} else if !endex {
 		log.Fatal("ERROR: invalid data format.there is no end room")
