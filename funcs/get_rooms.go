@@ -38,6 +38,12 @@ func GetRooms(lines []string) (string, string, int, map[string][]string) {
 				log.Fatal("ERROR: invalid data format. invalid room name")
 				
 			}
+			if _,err:= strconv.Atoi(room[1]);err!=nil  {
+				log.Fatal("ERROR: invalid data format. invalid coordinates")
+			}
+			if _,err:= strconv.Atoi(room[2]);err!=nil {
+				log.Fatal("ERROR: invalid data format. invalid coordinates")
+			}
 			if _, exist := rooms[room[0]]; exist {
 				log.Fatal("ERROR: invalid data format. room already exists")
 			}
@@ -70,12 +76,7 @@ func GetRooms(lines []string) (string, string, int, map[string][]string) {
 		}
 
 		if len(tunnel) == 2 && line[0] != '#' {
-			if _,err:= strconv.Atoi(tunnel[0]);err!=nil  {
-				log.Fatal("ERROR: invalid data format. invalid coordinates")
-			}
-			if _,err:= strconv.Atoi(tunnel[1]);err!=nil {
-				log.Fatal("ERROR: invalid data format. invalid coordinates")
-			}
+			
 			if _, exist := rooms[tunnel[0]]; !exist {
 				log.Fatal("ERROR: invalid data format. unexisting room")
 			}
