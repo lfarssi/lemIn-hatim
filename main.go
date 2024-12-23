@@ -25,8 +25,8 @@ func main() {
 	if moveCount < 1 {
 		log.Fatal("Error: Invalid data format")
 	}
-	for _, line := range lines {
-		if len(line) > 2 && line[0] != '#' || line == "##start" || line == "##end" {
+	for i, line := range lines {
+		if i==0 || line[0] != '#' || line == "##start" || line == "##end" {
 			fmt.Println(strings.TrimSpace(line))
 		}
 	}

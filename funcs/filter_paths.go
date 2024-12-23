@@ -5,9 +5,11 @@ import (
 )
 
 func FilterPaths(allPaths [][]string) [][]string {
-	// Sort paths by length to prioritize longer paths
+	// Sort paths by length to prioritize longer paths if we did not sort the resulst can not be controlled
+	//  and  if we sorted ascendently the priority will be given to the shortest path ignoring everything
+
 	sort.Slice(allPaths, func(i, j int) bool {
-		return len(allPaths[i]) > len(allPaths[j])
+		return len(allPaths[i]) < len(allPaths[j])
 	})
 	// Store the best combination of non-overlapping paths
 	var bestCombination [][]string

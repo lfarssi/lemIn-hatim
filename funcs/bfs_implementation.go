@@ -10,7 +10,6 @@ func BreadthFirstSearch(graph map[string][]string, start, end string) [][]string
 		current := path[len(path)-1]
 
 		if current == end {
-
 			shortestPaths = append(shortestPaths, path)
 			continue
 		}
