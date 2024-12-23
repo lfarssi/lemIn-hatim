@@ -9,7 +9,7 @@ func FilterPaths(allPaths [][]string) [][]string {
 	//  and  if we sorted ascendently the priority will be given to the shortest path ignoring everything
 
 	sort.Slice(allPaths, func(i, j int) bool {
-		return len(allPaths[i]) < len(allPaths[j])
+		return len(allPaths[i]) > len(allPaths[j])
 	})
 	// Store the best combination of non-overlapping paths
 	var bestCombination [][]string

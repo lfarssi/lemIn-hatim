@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strings"
 
 	Mosdef "Mosdef/funcs"
@@ -12,15 +13,18 @@ func main() {
 	lines := Mosdef.ReadFile()
 	start, end, antsNumber, graph := Mosdef.GetRooms(lines)
 	var allPaths [][]string
-	if Mosdef.LinksChecker(graph) {
+	if !Mosdef.LinksChecker(graph) {
 		allPaths = Mosdef.BreadthFirstSearch(graph, start, end)
 	} else {
 		allPaths = Mosdef.DepthFirstSearch(graph, start, end)
 	}
 	filteredPaths := Mosdef.FilterPaths(allPaths)
 	antDistribution := Mosdef.DistributeAnts(filteredPaths, antsNumber)
-	finalResult := Mosdef.SimulateAntMovement(filteredPaths, antDistribution)
-
+	finalResult, moveCount := Mosdef.SimulateAntMovement(filteredPaths, antDistribution)
+	if moveCount < 1 {
+		log.Fatal("ERROR: invalid data format. no path found")
+		
+	}
 	for i, line := range lines {
 		if i == 0 || line[0] != '#' || line == "##start" || line == "##end" {
 			fmt.Println(strings.TrimSpace(line))
