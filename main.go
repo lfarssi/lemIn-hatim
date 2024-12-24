@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"strings"
 
 	Mosdef "Mosdef/funcs"
 )
 
 func main() {
-	err:=Mosdef.CheckArgs()
+	err := Mosdef.CheckArgs()
 	if err != "" {
 		fmt.Println(err)
 		return
