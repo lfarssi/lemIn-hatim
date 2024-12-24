@@ -33,11 +33,8 @@ func main() {
 
 	filteredPaths := Mosdef.FilterPaths(allPaths)
 	antDistribution := Mosdef.DistributeAnts(filteredPaths, antsNumber)
-	finalResult, moveCount := Mosdef.SimulateAntMovement(filteredPaths, antDistribution)
-	if moveCount < 1 {
-		log.Fatal("ERROR: invalid data format. no path found")
+	finalResult := Mosdef.SimulateAntMovement(filteredPaths, antDistribution)
 
-	}
 	for i, line := range lines {
 		if i == 0 || line[0] != '#' || line == "##start" || line == "##end" {
 			fmt.Println(strings.TrimSpace(line))
